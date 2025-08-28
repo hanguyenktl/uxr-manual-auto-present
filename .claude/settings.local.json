@@ -5,7 +5,8 @@
       "Bash(npm install:*)",
       "Bash(mkdir:*)",
       "Bash(npm run lint)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(npm run dev:*)"
     ],
     "deny": [],
     "ask": []
