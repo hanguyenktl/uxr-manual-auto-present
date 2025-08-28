@@ -17,19 +17,19 @@ const teamTags = {
 }
 
 // Function to calculate stage criticality based on pain points
-const getStageAttentionLevel = (stage: any) => {
+const getStageAttentionLevel = (stage: { painPoints: Array<{ severity: string; priority: string; frequency: string }> }) => {
   if (stage.painPoints.length === 0) return 'low'
   
-  const criticalCount = stage.painPoints.filter((p: any) => p.severity === 'CRITICAL').length
-  const highCount = stage.painPoints.filter((p: any) => p.severity === 'HIGH').length
-  const p1Count = stage.painPoints.filter((p: any) => p.priority === 'P1').length
-  const dailyCount = stage.painPoints.filter((p: any) => p.frequency === 'DAILY').length
+  const criticalCount = stage.painPoints.filter(p => p.severity === 'CRITICAL').length
+  const highCount = stage.painPoints.filter(p => p.severity === 'HIGH').length
+  const p1Count = stage.painPoints.filter(p => p.priority === 'P1').length
+  const dailyCount = stage.painPoints.filter(p => p.frequency === 'DAILY').length
   
   // Critical attention: Multiple critical issues, P1 priority, daily frequency
   if (criticalCount >= 1 && p1Count >= 1 && dailyCount >= 1) return 'critical'
   
   // High attention: High severity + P1/P2, or multiple high severity
-  if ((highCount >= 1 && (p1Count >= 1 || stage.painPoints.some((p: any) => p.priority === 'P2'))) || 
+  if ((highCount >= 1 && (p1Count >= 1 || stage.painPoints.some(p => p.priority === 'P2'))) || 
       highCount >= 2) return 'high'
   
   // Medium attention: Some high severity or multiple medium issues

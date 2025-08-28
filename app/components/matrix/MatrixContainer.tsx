@@ -11,7 +11,7 @@ interface MatrixContainerProps {
 }
 
 // Position items based on business priority zones for clearer planning
-const getPositionByPriority = (painPoints: any[]) => {
+const getPositionByPriority = (painPoints: Array<{ id: string; priority: string }>) => {
   const positions = new Map<string, { x: number; y: number }>()
   
   // Group by priority
@@ -20,7 +20,7 @@ const getPositionByPriority = (painPoints: any[]) => {
   const p3Items = painPoints.filter(p => p.priority === 'P3')
   
   // P1: Top-right quadrant (Core workflow blockers)
-  p1Items.forEach((item, i) => {
+  p1Items.forEach((item) => {
     const baseX = 75
     const baseY = 25
     const angle = (i / Math.max(p1Items.length, 1)) * Math.PI * 0.5 // Quarter circle
@@ -44,7 +44,7 @@ const getPositionByPriority = (painPoints: any[]) => {
   })
   
   // P3: Bottom-left quadrant (Strategic)
-  p3Items.forEach((item, i) => {
+  p3Items.forEach((item) => {
     const baseX = 25
     const baseY = 75
     positions.set(item.id, { x: baseX, y: baseY })
@@ -241,7 +241,7 @@ export default function MatrixContainer({ className }: MatrixContainerProps) {
                           {evidence.customer}
                         </div>
                         <div className="text-xs text-gray-600 italic mb-1">
-                          &quot;{evidence.quote}&quot;
+                          &ldquo;{evidence.quote}&rdquo;
                         </div>
                         <div className="text-xs text-red-600">
                           Impact: {evidence.impact}
@@ -343,7 +343,7 @@ export default function MatrixContainer({ className }: MatrixContainerProps) {
             <p className="text-sm text-gray-600 italic">
               All identified pain points are critical for either workflow functionality or adoption success.
             </p>
-            <div className="mt-2 text-xs text-gray-500">Research shows no "nice-to-have" items</div>
+            <div className="mt-2 text-xs text-gray-500">Research shows no &ldquo;nice-to-have&rdquo; items</div>
           </div>
         </div>
         
