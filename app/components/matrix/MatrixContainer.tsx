@@ -20,7 +20,7 @@ const getPositionByPriority = (painPoints: Array<{ id: string; priority: string 
   const p3Items = painPoints.filter(p => p.priority === 'P3')
   
   // P1: Top-right quadrant (Core workflow blockers)
-  p1Items.forEach((item) => {
+  p1Items.forEach((item, i) => {
     const baseX = 75
     const baseY = 25
     const angle = (i / Math.max(p1Items.length, 1)) * Math.PI * 0.5 // Quarter circle
